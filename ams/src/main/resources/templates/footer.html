@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>AMS - Assets Management System</title>
+
+<link rel="stylesheet" href="css/styles.css" th:href="@{/css/styles.css}"  type="text/css" />
+			
+            
+<script type="text/javascript" src="js/jquery.js" th:src="@{/js/jquery.js}" ></script>
+<script type="text/javascript" src="js/slider.js" th:src="@{/js/slider.js}"></script>
+<script type="text/javascript" src="js/superfish.js" th:src="@{/js/superfish.js}"></script>
+
+<script type="text/javascript" src="js/custom.js" th:src="@{/js/custom.js}"></script>
+
+</head>
+
+<body class="homepage">
+
+ <div id="footer" th:fragment="thefooter">
+      <div class="footer-content">
+
+        <div class="footer-box">
+            <h4>A propos du site</h4>
+
+            <p>
+                Morbi fermentum, nunc id pellentesque blandit, lectus velit pellentesque nisl.
+            </p>
+        </div>
+        
+        <div class="footer-box">
+            <h4>Categories</h4>
+
+            <ul>
+              <li><a href="#">Lorem ipsum dolor sit amet.</a></li>
+              <li><a href="#">Quisque consequat nunc a felis.</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-box">
+
+            <h4>Nos réseaux</h4>
+            <ul>
+            <li><a href="http://zypopwebtemplates.com">ZyPOP web templates</a></li>
+						<li><a href="http://www.justfreetemplates.com" title="free web templates">Free web templates</a></li>
+						
+            </ul>	
+        </div>
+        
+        <div class="footer-box end-footer-box">
+            <h4>Search our site</h4>
+
+            <form action="#" method="get">
+                <p>
+                    <input type="text" id="searchquery" size="18" name="searchterm" />
+
+                    <input type="submit" id="searchbutton" value="Search" class="formbutton" />
+                </p>
+            </form>
+        </div>     
+        <div class="clear"></div> 
+    </div>
+    <div id="footer-links">
+
+    <!-- A link to http://www.zypopwebtemplates.com must remain. To remove link see http://www.zypopwebtemplates.com/licensing -->
+            <p>&copy; Hub4U 2019. <a href="http://zypopwebtemplates.com/">My App</a> by Chaikou</p>
+    </div>  
+</div>
+</body>
+</html>

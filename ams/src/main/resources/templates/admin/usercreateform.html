@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>AMS - Shops </title>
+<link rel="stylesheet" href="../../static/css/styles.css" th:href="@{/css/styles.css}"  type="text/css" />
+			
+            
+<script type="text/javascript" src="../../static/js/jquery.js" th:src="@{/js/jquery.js}"></script>
+<script type="text/javascript" src="../../static/js/slider.js" th:src="@{/js/slider.js}"></script>
+<script type="text/javascript" src="../../static/js/superfish.js" th:src="@{/js/superfish.js}"></script>
+
+<script type="text/javascript" src="../../static/js/custom.js" th:src="@{/js/custom.js}"></script>
+
+</head>
+
+<body class="noheader">
+<div id="container">
+
+    <div th:replace="header :: theheader"></div>
+        
+    <div id="nav">
+    	<ul class="sf-menu dropdown">
+        	<li><a href="index.html" th:href="@{/}">Accueil</a></li>
+            <li><a class="has_submenu" href="#"  >Marché</a>
+            	<ul>
+                	<li><a href="../workbench/shops.html" th:href="@{/workbench/shops}">Boutiques</a></li>
+                    <li><a href="../workbench/tenants.html" th:href="@{/workbench/tenants}">Locataires</a></li>
+                </ul>
+            </li>
+            <li class="selected"><a class="has_submenu" href="#">Administration</a>
+            	<ul>
+                	<li><a href="shopsadmin.html" th:href="@{/admin/shopsadmin}">Boutiques</a></li>
+                	<li><a href="tenantsadmin.html" th:href="@{/admin/tenantsadmin}">Locataires</a></li>
+                    <li><a href="#">Employés</a></li>
+                    <li class="selected"><a href="users.html" th:href="@{/admin/users}">Utilisateurs</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Aide</a></li>
+            <li  style="margin-left: 50px; margin-top: 10px;">
+            	<form action="#" th:action="@{/logout}" method="post">
+            		<input type="submit" value="Déconnexion"/>
+            	</form>
+            </li>
+        </ul>
+    </div>
+        
+    <div id="body">
+        <div id="breadcrumbs">
+            <a href="index.html" th:href="@{/}" >Accueil</a> &raquo;
+            <a href="index.html" th:href="@{/admin/users}" >Utilisateurs</a> &raquo;
+            <strong>Création Utilisateur</strong>
+        </div>
+            
+		<div id="content">
+            <div class="box">
+            
+				<h1>Création Compte Utilisateur</h1>
+
+				<p>&nbsp;</p>
+<!-- 
+				<p th:if="${create_error}">
+					<span style="color: red;"  th:utext="#{user.create.error}" >Unable to create new UserAccount  </span>
+				</p> 
+ -->
+				<fieldset>
+					<legend>Formulaire de création</legend>
+					<form action="#" th:action="@{/admin/users}" th:object="${userAccount}" method="post">
+						<p>
+							<label for="lastName">Nom *:</label>
+							<input id="lastName" type="text" th:field="*{lastName}"  /><br/>
+							<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" style="color: red;">Last name error</span>
+						</p>		
+						<p>
+							<label for="firstName">Prénom:</label>
+							<input id="firstName" type="text" th:field="*{firstName}"/>
+							<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+							<br/>
+						</p>
+						<p>
+							<label for="userName">Nom d'utilisateur *:</label>
+							<input id="userName" type="text" th:field="*{userName}"/>
+							<span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" style="color: red;">username error</span> <br/>
+						</p>
+						<p>
+							<label for="password">Mot de passe *:</label>
+							<input id="password" type="password" th:field="*{password}"  />
+							<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: red;">Password error</span><br/>
+						<p>
+							<label for="confirmpassword">Confirmer M.d.P. *:</label>
+							<input id="confirmpassword" type="password" th:field="*{confirmPassword}"/>
+							<span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" style="color: red;">Password Confirm error</span><br/>
+						</p>
+						<p>
+							<label for="roles">Roles:</label>
+					        <input type="checkbox" name="role" value="ROLE_ADMIN" > Administrateur      
+					        <input type="checkbox" name="role" value="ROLE_MANAGER" style="margin-left: 20px;"> Manager      
+					        <input type="checkbox" name="role" value="ROLE_ACCOUNTING" style="margin-left: 20px;"> Comptable<br>      
+					        <input type="checkbox" name="role" value="ROLE_STAFF" style="margin-left: 20px;"> Staff<br>      
+						</p>
+						<p>
+							<label for="enabled">Activer:</label>
+							<input id="enable" type="checkbox" th:checked="*{enabled}" th:field="*{enabled}"/>
+						</p>
+								
+						<p>
+							<input class="formbutton" value="Enregistrer" type="submit" />
+						</p>
+					</form>
+				</fieldset>
+				
+				<p>&nbsp;</p>
+				                
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <ul>	
+               <li>
+                    <h4><span>Navigation</span></h4>
+                    <ul class="blocklist">
+                        <li><a href="index.html" th:href="@{/}">Accueil</a></li>
+                        <li><a href="shops.html" th:href="@{/workbench/shops}">Boutiques</a></li>
+                        <li><a href="#">Administration</a></li>
+                        <li><a href="#">Aide</a></li>
+                    </ul>
+                </li>               
+            </ul> 
+        </div>
+    	<div class="clear"></div>
+    </div>
+</div>
+
+<div th:replace="footer :: thefooter"></div>
+
+</body>
+</html>

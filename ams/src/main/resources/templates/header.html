@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>AMS - Assets Management System</title>
+<link rel="stylesheet" href="css/styles.css" th:href="@{/css/styles.css}"  type="text/css" />
+			
+            
+<script type="text/javascript" src="js/jquery.js" th:src="@{/js/jquery.js}" ></script>
+<script type="text/javascript" src="js/slider.js" th:src="@{/js/slider.js}"></script>
+<script type="text/javascript" src="js/superfish.js" th:src="@{/js/superfish.js}"></script>
+
+<script type="text/javascript" src="js/custom.js" th:src="@{/js/custom.js}"></script>
+
+</head>
+
+<body class="homepage">
+
+	<div id="container">
+		<div id="header" th:fragment="theheader">
+	    	<h1><a href="/" th:href="@{/}"  th:utext="#{app.name}">Hub4All</a></h1>
+	        <h2 th:utext="#{app.slogan}">Consulting - Engineering - Formations</h2>
+	        <div class="clear"></div>
+	    </div>
+	</div>
+
+</body>
+</html>

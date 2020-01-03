@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>AMS - Assets Management System</title>
+<link rel="stylesheet" href="css/styles.css" th:href="@{/css/styles.css}"  type="text/css" />
+			
+            
+<script type="text/javascript" src="js/jquery.js" th:src="@{/js/jquery.js}" ></script>
+<script type="text/javascript" src="js/slider.js" th:src="@{/js/slider.js}"></script>
+<script type="text/javascript" src="js/superfish.js" th:src="@{/js/superfish.js}"></script>
+
+<script type="text/javascript" src="js/custom.js" th:src="@{/js/custom.js}"></script>
+
+</head>
+
+<body class="noheader">
+<div id="container">
+	<div id="header">
+    	<h1><a href="/" th:href="@{/}">Maï - MCC</a></h1>
+        <h2>Management Control Center</h2>
+        <div class="clear"></div>
+    </div>
+    <div id="body">
+
+        <div style="margin-top: 120px;">
+            
+            <div th:if="${param.logout}" style="color: green;">
+            Vous êtes déconnectés !
+            </div>
+
+            <fieldset style="margin-top: 20px;">
+                <legend>Connectez vous </legend>
+                <form action="#" th:action="@{/login}" method="post">
+                    <p>
+                    	<label for="username">Utilisateur:</label>
+                    	<input name="username" id="username" type="text" /><br />
+                    </p>      
+                    <p>
+                    	<label for="password">Mot de passe:</label>
+                    	<input name="password" id="password" type="password" /><br />
+                    </p>
+                    
+		            <div th:if="${param.error}" style="color: red;">
+		            	Nom d'utilisateur et/ou mot de passe incorrect <br/> <br/>
+		            </div> 
+
+                    <p><input name="send" class="formbutton" value="Connexion" type="submit" /></p>
+                </form>
+            </fieldset>
+            
+        </div>
+
+
+    	<div class="clear"></div>
+    </div>
+</div>
+
+<div th:replace="footer :: thefooter"></div>
+
+</body>
+</html>

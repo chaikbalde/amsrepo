@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>AMS - Shops </title>
+<link rel="stylesheet" href="../../static/css/styles.css" th:href="@{/css/styles.css}"  type="text/css" />
+			
+            
+<script type="text/javascript" src="../../static/js/jquery.js" th:src="@{/js/jquery.js}"></script>
+<script type="text/javascript" src="../../static/js/slider.js" th:src="@{/js/slider.js}"></script>
+<script type="text/javascript" src="../../static/js/superfish.js" th:src="@{/js/superfish.js}"></script>
+
+<script type="text/javascript" src="../../static/js/custom.js" th:src="@{/js/custom.js}"></script>
+
+</head>
+
+<body class="noheader">
+<div id="container">
+
+    <div th:replace="header :: theheader"></div>
+        
+    <div id="nav">
+    	<ul class="sf-menu dropdown">
+        	<li><a href="index.html" th:href="@{/}">Accueil</a></li>
+            <li><a class="has_submenu" href="#"  >Marché</a>
+            	<ul>
+                	<li><a href="../workbench/shops.html" th:href="@{/workbench/shops}">Boutiques</a></li>
+                    <li><a href="../workbench/tenants.html" th:href="@{/workbench/tenants}">Locataires</a></li>
+                </ul>
+            </li>
+            <li class="selected"><a class="has_submenu" href="#">Administration</a>
+            	<ul>
+                	<li><a href="shopsadmin.html" th:href="@{/admin/shopsadmin}">Boutiques</a></li>
+                	<li class="selected"><a href="tenantsadmin.html" th:href="@{/admin/tenantsadmin}">Locataires</a></li>
+                    <li><a href="#">Employés</a></li>
+                    <li><a href="#">Utilisateurs</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Aide</a></li>
+            <li  style="margin-left: 50px; margin-top: 10px;">
+            	<form action="#" th:action="@{/logout}" method="post">
+            		<input type="submit" value="Déconnexion"/>
+            	</form>
+            </li>
+        </ul>
+    </div>
+        
+    <div id="body">
+        <div id="breadcrumbs">
+            <a href="index.html" th:href="@{/}" >Accueil</a> &raquo;
+            <a href="tenantsadmin.html" th:href="@{/admin/tenantsadmin}" >Admin - Locataires</a> &raquo;
+            <strong>Création Locataire</strong>
+        </div>
+            
+		<div id="content">
+            <div class="box">
+            
+				<h1>Nouveau Locataire</h1>
+
+				<p>&nbsp;</p>
+				
+				<fieldset>
+					<legend>Formulaire de création</legend>
+					<form action="#" th:action="@{/admin/tenantregister}" th:object="${tenant}" method="post">
+						<p>
+							<label for="lastName">Nom:</label>
+							<input id="lastName" type="text" th:field="*{lastName}"  /><br />
+						</p>		
+						<p>
+							<label for="firstName">Prénom(s):</label>
+							<input id="firstName" type="text" th:field="*{firstName}"  /><br />
+						</p>
+<!-- 								
+						<p>
+							<label for="dob">Date de Naissance:</label>
+							<input id="dob" type="date" th:field="*{dob}"  placeholder="jj/MM/AAAA"/><br />
+						</p>
+ -->						
+						<p>
+							<label for="address">Adresse:</label>
+							<input id="address" type="text" th:field="*{address}" /><br />
+						</p>
+						
+						<p>
+							<label for="phone">Téléphone:</label>
+							<input id="phone" type="text" th:field="*{phone}" /><br />
+						</p>
+						<p>
+							<label for="email">E-Mail:</label>
+							<input id="email" type="text" th:field="*{email}" /><br />
+						</p>
+						<p>
+							<label for="webSite">Site Web:</label>
+							<input id="webSite" type="text" th:field="*{webSite}" /><br />
+						</p>
+						<p>
+							<label for="shopSelect">Boutique:</label>
+							<select th:field="*{shopSelect}" id="shopSelect">
+								<option value="">- Boutique -</option>
+								<option th:each="shp : ${shopz}" th:value="${shp.id}" th:text="${shp.reference} + ' -- ' + ${#numbers.formatInteger(shp.price,4,'WHITESPACE')} ">OPTION_REF</option>
+							</select>								
+						</p>
+						<p>
+							<label for="shopdescription">Description Boutique:</label>	
+							<textarea cols="30" rows="3" id="shopdescription" th:field="*{shopDescription}"></textarea><br />
+						</p>
+						<p>
+							<label for="regTypeSelect">Type Location:</label>
+							<select th:field="*{regTypeSelect}" id="regTypeSelect" style="width: 220px;" >
+								<option value="">- Type -</option>
+								<option value="MONTHLY">Mensuel</option>
+								<option value="QUARTERLY">Trimestriel</option>
+								<option value="HALFYEARLY">Semestriel</option>
+								<option value="YEARLY">Annuel</option>
+							</select>								
+						</p>
+						<p>
+							<label for="paidAmount">Paiement:</label>
+							<input id="paidAmount" th:field="*{paidAmount}"   type="number" /><br />
+						</p>
+						<p>
+							<input class="formbutton" value="Enregistrer" type="submit" />
+						</p>
+					</form>
+				</fieldset>
+				
+				<p>&nbsp;</p>
+				                
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <ul>	
+               <li>
+                    <h4><span>Navigation</span></h4>
+                    <ul class="blocklist">
+                        <li><a href="index.html" th:href="@{/}">Accueil</a></li>
+                        <li><a href="shopsadmin.html" th:href="@{/admin/shopsadmin}">Boutiques</a></li>
+                        <li><a href="tenantsadmin">Locataires</a></li>
+                        <li><a href="#">Aide</a></li>
+                    </ul>
+                </li>               
+            </ul> 
+        </div>
+    	<div class="clear"></div>
+    </div>
+</div>
+
+<div th:replace="footer :: thefooter"></div>
+ 
+</body>
+</html>

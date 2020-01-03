@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>AMS - Shops </title>
+<link rel="stylesheet" href="../../static/css/styles.css" th:href="@{/css/styles.css}"  type="text/css" />
+			
+            
+<script type="text/javascript" src="../../static/js/jquery.js" th:src="@{/js/jquery.js}"></script>
+<script type="text/javascript" src="../../static/js/slider.js" th:src="@{/js/slider.js}"></script>
+<script type="text/javascript" src="../../static/js/superfish.js" th:src="@{/js/superfish.js}"></script>
+
+<script type="text/javascript" src="../../static/js/custom.js" th:src="@{/js/custom.js}"></script>
+
+</head>
+
+<body class="noheader">
+<div id="container">
+
+    <div th:replace="header :: theheader"></div>
+        
+    <div id="nav">
+    	<ul class="sf-menu dropdown">
+        	<li><a href="index.html" th:href="@{/}">Accueil</a></li>
+            <li><a class="has_submenu" href="#"  >Marché</a>
+            	<ul>
+                	<li><a href="../workbench/shops.html" th:href="@{/workbench/shops}">Boutiques</a></li>
+                    <li><a href="../workbench/tenants.html" th:href="@{/workbench/tenants}">Locataires</a></li>
+                </ul>
+            </li>
+            <li class="selected"><a class="has_submenu" href="#">Administration</a>
+            	<ul>
+                	<li><a href="shopsadmin.html" th:href="@{/admin/shopsadmin}">Boutiques</a></li>
+                	<li><a href="tenantsadmin.html" th:href="@{/admin/tenantsadmin}">Locataires</a></li>
+                    <li><a href="#">Employés</a></li>
+                    <li class="selected"><a href="admin/users.html" th:href="@{/admin/users}">Utilisateurs</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Aide</a></li>
+            <li  style="margin-left: 50px; margin-top: 10px;">
+            	<form action="#" th:action="@{/logout}" method="post">
+            		<input type="submit" value="Déconnexion"/>
+            	</form>
+            </li>
+        </ul>
+    </div>
+        
+    <div id="body">
+        <div id="breadcrumbs">
+            <a href="index.html" th:href="@{/}" >Accueil</a> &raquo;
+            <strong>Utilisateurs</strong>
+        </div>
+            
+		<div id="content">
+            <div class="box">
+            
+				<h1>Utilisateurs</h1>
+
+				<p>&nbsp;</p>
+				
+				<p th:if="${create_success}">
+					<span style="background-color: green; color: white;"  th:utext="#{user.create.success(${username})}" >Successfully Created User <b th:text="${shop.reference}"></b>  </span>
+				</p> 
+				
+				<p th:if="${delete_success}" >
+					<span style="background-color: green; color: white;" th:utext="#{user.delete.success(${userId}) }">Successfully Removed User ${shopref}</span>
+				</p>
+				
+				<p th:if="${update_success}" >
+					<span style="background-color: green; color: white;"  th:utext="#{shop.update.success(${shop.reference})}" >Successfully Updated User <b th:text="${shop.reference}"></b>  </span>
+				</p>
+				
+				<span style="float: right;"><a href="usercreateform.html" th:href="@{/admin/usercreateform}"><img alt="Add Pic" src="../../static/images/plus.png" th:src="@{/images/plus.png}" title="Enregistrer un nouveau locataire"></a></span>
+
+				<h4>Liste des utilisateurs </h4>
+				<table>
+					<tbody>
+						<tr>
+							<th>Utilisateur</th>
+							<th>Nom, Prénom(s)</th>
+							<th>Roles</th>
+							<th>Activé</th>
+							<th>Action</th>
+						</tr>
+						<tr th:each="user: ${users}">
+							<td><a href="#" th:href="@{'/admin/users/' + ${user.id}}" ><span th:text="${user.userName}">UNAME</span> </a></td>
+							<td th:text="${user.lastName} + ', ' + ${user.firstName}">BALDEDIALLO</td>
+							<td>
+								<span th:each="role : ${user.roles}">
+									<span th:switch="${role.roleName}">
+										<span th:case="'ROLE_ADMIN'">- Administrateur</span> 
+										<span th:case="'ROLE_MANAGER'">- Manager</span> 
+										<span th:case="'ROLE_ACCOUNTING'">- Comptable</span> 
+										<span th:case="'ROLE_STAFF'">- Staff</span> <br/>
+									</span>
+								</span> 
+							</td>
+							<td align="center">
+								<img alt="active" src="../../static/images/checked_green.png" 
+									th:src="${user.enabled} ? @{/images/checked_green.png} : @{/images/checked_red.png}" >
+							</td>
+							<td align="center">
+								<a href="#"  th:href="@{'/admin/userupdateform/' + ${user.id} }"><img title="Modifier" alt="Edit" src="../../static/images/edit.png" th:src="@{/images/edit.png}"></a>
+								&nbsp;
+								<a href="#"  th:href="@{'/admin/userdel/' + ${user.id} }" ><img title="Supprimer" alt="Trash" src="../../static/images/trash.png" th:src="@{/images/trash.png}"></a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p>&nbsp;</p>
+				                
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <ul>	
+               <li>
+                    <h4><span>Navigation</span></h4>
+                    <ul class="blocklist">
+                        <li><a href="index.html" th:href="@{/}">Accueil</a></li>
+                        <li><a href="shopsadmin.html" th:href="@{/admin/shopsadmin}">Boutiques</a></li>
+                        <li><a href="tenantsadmin.html" th:href="@{/admin/tenantsadmin}">Locataires</a></li>
+                        <li><a href="#">Aide</a></li>
+                    </ul>
+                </li>               
+            </ul> 
+        </div>
+    	<div class="clear"></div>
+    </div>
+</div>
+
+<div th:replace="footer :: thefooter"></div>
+
+</body>
+</html>

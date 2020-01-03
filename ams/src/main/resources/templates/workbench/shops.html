@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>AMS - Shops </title>
+<link rel="stylesheet" href="../../static/css/styles.css" th:href="@{/css/styles.css}"  type="text/css" />
+			
+            
+<script type="text/javascript" src="../../static/js/jquery.js" th:src="@{/js/jquery.js}"></script>
+<script type="text/javascript" src="../../static/js/slider.js" th:src="@{/js/slider.js}"></script>
+<script type="text/javascript" src="../../static/js/superfish.js" th:src="@{/js/superfish.js}"></script>
+
+<script type="text/javascript" src="../../static/js/custom.js" th:src="@{/js/custom.js}"></script>
+
+</head>
+
+<body class="noheader">
+<div id="container">
+
+    <div th:replace="header :: theheader"></div>
+        
+    <div id="nav">
+    	<ul class="sf-menu dropdown">
+        	<li><a href="index.html" th:href="@{/}">Accueil</a></li>
+            <li class="selected"><a class="has_submenu" href="#"  >Marché</a>
+            	<ul>
+                	<li class="selected"><a href="workbench/shops.html" th:href="@{/workbench/shops}">Boutiques</a></li>
+                    <li><a href="workbench/tenants" th:href="@{/workbench/tenants}">Locataires</a></li>
+                </ul>
+            </li>
+            <li><a class="has_submenu" href="#">Administration</a>
+            	<ul>
+                	<li><a href="shopsadmin.html" th:href="@{/admin/shopsadmin}">Boutiques</a></li>
+                	<li><a href="tenantsadmin.html" th:href="@{/admin/tenantsadmin}">Locataires</a></li>
+                    <li><a href="#">Employés</a></li>
+                    <li><a href="#">Utilisateurs</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Aide</a></li>
+            <li  style="margin-left: 50px; margin-top: 10px;">
+            	<form action="#" th:action="@{/logout}" method="post">
+            		<input type="submit" value="Déconnexion"/>
+            	</form>
+            </li>
+        </ul>
+    </div>
+        
+    <div id="body">
+        <div id="breadcrumbs">
+            <a href="index.html" th:href="@{/}" >Accueil</a> &raquo;
+            <strong>Marché - Boutiques</strong>
+        </div>
+            
+		<div id="content">
+            <div class="box">
+            
+				<h1>Boutiques</h1>
+
+				<p>&nbsp;</p>
+
+				<h4>Liste des boutiques dispo</h4>
+				<table>
+					<tbody>
+						<tr>
+							<th>Référence</th>
+							<th>Dimensions</th>
+							<th>Prix Location</th>
+							<th align="center">Loué</th>
+							<th>Description</th>
+						</tr>
+						<tr th:each="shop: ${shops}">
+							<td th:text="${shop.reference}">ABCDE</td>
+							<td th:text="${shop.dimensions}">999X888</td>
+							<td th:text="${#numbers.formatInteger(shop.price,4,'WHITESPACE')}">9 999</td>
+							<td align="center">
+								<img alt="occupied" src="../../static/images/checked_green.png" th:src="${shop.occupied} ?  @{/images/checked_green.png} : @{/images/checked_red.png}">
+							</td>
+							<td th:text="${shop.description}">DESC BP 9999 Conakry</td>
+						</tr>
+					</tbody>
+				</table>
+				<p>&nbsp;</p>
+				                
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <ul>	
+               <li>
+                    <h4><span>Navigation</span></h4>
+                    <ul class="blocklist">
+                        <li><a href="index.html" th:href="@{/}">Accueil</a></li>
+                        <li><a href="shops.html" th:href="@{/workbench/shops}">Boutiques</a></li>
+                        <li><a href="tenants.html" th:href="@{/workbench/tenants}">Locataires</a></li>
+                        <li><a href="#">Aide</a></li>
+                    </ul>
+                </li>               
+            </ul> 
+        </div>
+    	<div class="clear"></div>
+    </div>
+</div>
+
+<div th:replace="footer :: thefooter"></div>
+
+</body>
+</html>

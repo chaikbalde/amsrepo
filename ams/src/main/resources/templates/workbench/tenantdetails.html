@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>AMS - Shops </title>
+<link rel="stylesheet" href="../../static/css/styles.css" th:href="@{/css/styles.css}"  type="text/css" />
+			
+            
+<script type="text/javascript" src="../../static/js/jquery.js" th:src="@{/js/jquery.js}"></script>
+
+<script type="text/javascript" src="../../static/js/slider.js" th:src="@{/js/slider.js}"></script>
+<script type="text/javascript" src="../../static/js/superfish.js" th:src="@{/js/superfish.js}"></script>
+
+<script type="text/javascript" src="../../static/js/custom.js" th:src="@{/js/custom.js}"></script>
+
+
+</head>
+
+<body class="noheader">
+<div id="container">
+
+    <div th:replace="header :: theheader"></div>
+        
+    <div id="nav">
+    	<ul class="sf-menu dropdown">
+        	<li><a href="index.html" th:href="@{/}">Accueil</a></li>
+            <li class="selected"><a class="has_submenu" href="#"  >Marché</a>
+            	<ul>
+                	<li><a href="../workbench/shops.html" th:href="@{/workbench/shops}">Boutiques</a></li>
+                    <li class="selected"><a href="../workbench/tenants.html" th:href="@{/workbench/tenants}">Locataires</a></li>
+                </ul>
+            </li>
+            <li><a class="has_submenu" href="#">Administration</a>
+            	<ul>
+                	<li><a href="shopsadmin.html" th:href="@{/admin/shopsadmin}">Boutiques</a></li>
+                	<li><a href="tenantsadmin.html" th:href="@{/admin/tenantsadmin}">Locataires</a></li>
+                    <li><a href="#">Employés</a></li>
+                    <li><a href="#">Utilisateurs</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Aide</a></li>
+            <li  style="margin-left: 50px; margin-top: 10px;">
+            	<form action="#" th:action="@{/logout}" method="post">
+            		<input type="submit" value="Déconnexion"/>
+            	</form>
+            </li>
+        </ul>
+    </div>
+        
+    <div id="body">
+        <div id="breadcrumbs">
+            <a href="index.html" th:href="@{/}" >Accueil</a> &raquo;
+            <a href="tenants.html" th:href="@{/workbench/tenants}" >Locataires</a> &raquo;
+            <strong>Infos Location</strong>
+        </div>
+            
+		<div id="content">
+            <div class="box">
+            
+				<h1>Infos - Location</h1>
+
+				<p>&nbsp;</p>
+				
+				<fieldset>
+					<legend>Le Locataire</legend>
+					<p style="margin-top: 20px;">
+						<label for="lastName">Nom:</label>
+						<span th:text="${tenant.lastName}" >BALDE</span>
+					</p>		
+					<p>
+						<label for="firstName">Prénom(s):</label>
+						<span th:text="${tenant.firstName}" >CHAIKOU</span>
+					</p>
+<!-- 								
+						<p>
+							<label for="dob">Date de Naissance:</label>
+							<span th:text="${tenant.dob}" >18/02/1974</span>
+						</p>
+ -->						
+					<p>
+						<label for="address">Adresse:</label>
+						<span th:text="${tenant.address}" >BONFI PORT</span>
+					</p>
+					
+					<p>
+						<label for="phone">Téléphone:</label>
+						<span th:text="${tenant.phone}" >622 99 99 99</span>
+					</p>
+					<p>
+						<label for="email">E-Mail:</label>
+						<span th:text="${tenant.email}" >CBALDE@GMAIL.COM</span>
+					</p>
+					<p>
+						<label for="webSite">Site Web:</label>
+						<span th:text="${tenant.webSite}" >WWW.HUB4U.COM</span>
+					</p>
+					<p>
+						<label for="webSite">Date Enrégistrement:</label>
+						<span th:text="${#temporals.format(tenant.dateCreated, 'dd/MM/yyyy - HH:mm') }" >01/01/2019 13:35</span>
+<!-- 						
+						<span th:text="${#dates.format(tenant.dateCreated, 'dd/MMM/yyyy HH:mm')}" >01/01/2019 13:35</span>
+ -->						
+					</p>
+					<p>
+						<label for="webSite">Actif:</label>
+						<span th:text="${tenant.active}" >TRUE/FALSE</span>
+					</p>
+				</fieldset>
+	
+				<div th:each="shopreg : ${tenant.shops} ">
+					<fieldset>
+						<legend>Boutique <span th:text="${shopreg.shop.reference}"  style="color: #48913C; ">REFREF</span> </legend>
+						<p style="margin-top: 20px;">
+							<label for="shopTenantDescription">Description:</label>
+							<span th:text="${shopreg.shopTenantDescription}" >VENTE VENTE</span><br/>
+						</p>		
+						<p>
+							<label for="price">Prix de Location:</label>
+							<span th:text="${#numbers.formatInteger(shopreg.shop.price,4,'WHITESPACE')} + '  GNF'" >999 999</span><br/>
+						</p>		
+						<p>
+							<label for="registrationType">Type de Location:</label>
+							<span th:switch="${shopreg.registrationType}">
+								<span th:case="${T(com.hub4u.ams.model.RegistrationType).MONTHLY}" th:text="'Mensuel'">MONTHLY</span>
+								<span th:case="${T(com.hub4u.ams.model.RegistrationType).QUARTERLY}" th:text="'Trimestriel'">QUARTERLY</span>
+								<span th:case="${T(com.hub4u.ams.model.RegistrationType).HALFYEARLY}" th:text="'Semestriel'">HALFYEARLY</span>
+								<span th:case="${T(com.hub4u.ams.model.RegistrationType).YEARLY}" th:text="'Annuel'">YEARLY</span>
+								<span th:case="*" th:text="'Inconnu'">UNKNOWN</span>
+							</span><br/>
+						</p>		
+						<p>
+							<label for="dateStartRegistration">Début de Location:</label>
+							<span th:text="${#temporals.format(shopreg.dateStartRegistration, 'dd/MM/yyyy')   }" >01/01/2019</span><br/>
+						</p>		
+						<p>
+							<label for="dateEndRegistration">Fin de Location:</label>
+							<span th:text="${shopreg.dateEndRegistration}" >01/12/2019</span><br/>
+						</p>		
+						
+					</fieldset>
+					
+					<fieldset>
+						<legend>Paiements <span th:text="${shopreg.shop.reference}"  style="color: #48913C; ">REFREF</span> </legend>
+						<p style="margin-top: 20px;">
+							<label for="expectedAmount">Montant Attendu:</label>
+							<span th:text="${#numbers.formatInteger(shopreg.expectedAmount,4,'WHITESPACE') + ' GNF'}" style="font-weight: bold;">999 999</span><br/>
+						</p>		
+						<p>
+							<label for="dateEndRegistration">Total Payé:</label>
+							<span th:text="${#numbers.formatInteger(shopreg.currentPaidAmount,4,'WHITESPACE') + ' GNF' }" >9 999 999</span><br/>
+						</p>		
+						<p>
+							<label for="payments"><b> Paiements:</b></label>
+							<div th:each="pay : ${shopreg.payments}">
+								<span th:text="'- ' + ${#numbers.formatInteger(pay.amount,4,'WHITESPACE')} + '  GNF (' + ${#temporals.format(pay.payDate, 'dd/MM/yyyy - HH:mm') } + ')'">99 999</span>
+							</div>
+						</p>		
+						<p th:if="${(shopreg.expectedAmount - shopreg.currentPaidAmount) > 0}">
+							<label for="restToPay">Reste à Payer:</label>
+							<span th:text="${#numbers.formatInteger(shopreg.expectedAmount - shopreg.currentPaidAmount,4,'WHITESPACE') + ' GNF' }"  style="color: red;">999 999</span>
+							<form action="#" th:action="@{'/workbench/payment/' + ${shopreg.shop.id} + '/' + ${shopreg.tenant.id}}" method="post" th:if="${(shopreg.expectedAmount - shopreg.currentPaidAmount) gt 0}">
+								<p>
+									<label for="payAmount">Nouveau Paiement:</label>
+									<input id="payAmount" type="text" name="payAmount" placeholder="Montant"/><br />
+								</p>
+								<p>
+									<input class="formbutton" value="Payer" type="submit" />
+								</p>
+							</form>
+						</p>		
+					</fieldset>
+					
+				</div>
+				
+				<p>&nbsp;</p>
+				                
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <ul>	
+               <li>
+                    <h4><span>Navigation</span></h4>
+                    <ul class="blocklist">
+                        <li><a href="index.html" th:href="@{/}">Accueil</a></li>
+                        <li><a href="shops.html" th:href="@{/workbench/shops}">Boutiques</a></li>
+                        <li><a href="tenants">Locataires</a></li>
+                        <li><a href="#">Aide</a></li>
+                    </ul>
+                </li>               
+            </ul> 
+        </div>
+    	<div class="clear"></div>
+    </div>
+</div>
+ <div id="footer">
+      <div class="footer-content">
+
+        <div class="footer-box">
+            <h4>A Propos de Nous</h4>
+
+            <p>
+                Nous transformons le monde d'aujourd'hui en le DIGITALISANT !! 
+            </p>
+        </div>
+        
+        <div class="footer-box">
+            <h4>Categories</h4>
+
+            <ul>
+              <li><a href="#">Environnement de Travail.</a></li>
+              <li><a href="#">Administration du Système.</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-box">
+
+            <h4>Network sites</h4>
+            <ul>
+              <li><a href="#">Sites de Gestion</a></li>
+						<li><a href="#" title="web sites">Sites Web</a></li>
+            </ul>	
+        </div>
+        
+        <div class="footer-box end-footer-box">
+            <h4>Search our site</h4>
+
+            <form action="#" method="get">
+                <p>
+                    <input type="text" id="searchquery" size="18" name="searchterm" />
+
+                    <input type="submit" id="searchbutton" value="Search" class="formbutton" />
+                </p>
+            </form>
+        </div>     
+        <div class="clear"></div> 
+    </div>
+    <div id="footer-links">
+
+    <!-- A link to http://www.zypopwebtemplates.com must remain. To remove link see http://www.zypopwebtemplates.com/licensing -->
+            <p>&copy; Maï MCC - Management Control Center. <a href="http://zypopwebtemplates.com/">Web Layouts</a> by Chaikou</p>
+    </div>  
+</div>
+</body>
+</html>

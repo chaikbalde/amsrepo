@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>AMS - Assets Management System</title>
+<link rel="stylesheet" href="css/styles.css" th:href="@{/css/styles.css}"  type="text/css" />
+			
+            
+<script type="text/javascript" src="js/jquery.js" th:src="@{/js/jquery.js}" ></script>
+<script type="text/javascript" src="js/slider.js" th:src="@{/js/slider.js}"></script>
+<script type="text/javascript" src="js/superfish.js" th:src="@{/js/superfish.js}"></script>
+
+<script type="text/javascript" src="js/custom.js" th:src="@{/js/custom.js}"></script>
+
+</head>
+
+<body class="homepage">
+<div id="container">
+
+    <div th:replace="header :: theheader"></div>
+    
+    <div id="nav">
+    	<ul class="sf-menu dropdown">
+        	<li class="selected"><a href="index.html" th:href="@{/}">Accueil</a></li>
+            <li><a class="has_submenu" >Marché</a>
+            	<ul>
+                	<li><a href="workbench/shops.html" th:href="@{/workbench/shops}">Boutiques</a></li>
+                    <li><a href="workbench/tenants.html" th:href="@{/workbench/tenants}">Locataires</a></li>
+                </ul>
+            </li>
+            <li><a class="has_submenu" href="#">Administration</a>
+            	<ul>
+                	<li><a href="admin/shopsadmin.html" th:href="@{/admin/shopsadmin}">Boutiques</a></li>
+                	<li><a href="admin/tenantsadmin.html" th:href="@{/admin/tenantsadmin}">Locataires</a></li>
+                    <li><a href="#">Employés</a></li>
+                    <li><a href="admin/users.html" th:href="@{/admin/users}">Utilisateurs</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Aide</a></li>
+            <li  style="margin-left: 50px; margin-top: 10px;">
+            	<form action="#" th:action="@{/logout}" method="post">
+            		<input type="submit" value="Déconnexion"/>
+            	</form>
+            </li>
+        </ul>
+    </div>
+    
+    <div id="slides-container">
+        <div id="slides">
+            <div>
+                <div class="slide-image"><img src="images/slide-1.png" alt="Slide #1 image" /></div>
+                <div class="slide-text">
+                    <h2>Slide #1</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque venenatis sagittis enim. Maecenas ligula erat.
+            
+                </div>
+            </div>
+            
+            <div>
+            	<h2>Have fun with slides!</h2>
+                <p>These slides can contain anything a webpage can! HTML, Javascript, images, flash or whatever! They're completely easy to edit and add to as well, no need to bother editing or even going anywhere near some confusing Javascript files, simply add a &lt;div&gt;&lt;/div&gt; tag with your slider content to the "slides" contain - it takes just seconds to do!</p>
+            </div>
+            
+            <div>
+                <div class="slide-image slide-image-right"><img src="images/slide-3.png" alt="Slide #3 image" /></div>
+                <div class="slide-text">
+                    <h2>Slide #3</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.             
+                </div>
+            </div>
+		</div>
+        <div class="controls"><span class="jFlowNext"><span>Next</span></span><span class="jFlowPrev"><span>Prev</span></span></div>        
+        <div id="myController" class="hidden"><span class="jFlowControl">Slide 1</span><span class="jFlowControl">Slide 1</span><span class="jFlowControl">Slide 1</span></div>
+    </div>
+        
+    <div id="body">
+        <div id="breadcrumbs">
+            <span>You are here:</span>
+            <strong>Home</strong>
+        </div>
+            
+		<div id="content">
+            <div class="box">
+                <h2>Introduction</h2>
+					
+            <p>Welcome to Hu4All, a free premium valid CSS &amp; XHTML strict web template .</p>	
+            
+            <p>This template has been tested in:</p>
+
+
+            <ul class="styledlist">
+                <li>Firefox</li>
+                <li>Opera</li>
+                <li>IE</li>
+                <li>Chrome</li>
+            </ul>
+    
+            <h3>Buy unbranded</h3>
+
+
+
+            <p>Purchasing a template license for 8.00 GBP (at time of writing around 12 USD) gives you the right to remove any branding including links, logos and source tags relating to ZyPOP. As well as waiving the attribution requirement, your payment will also help us provide continued support for users as well as creating new web templates. Find out more about how to buy at the licensing page on our website which can be accessed at <a href="http://zypopwebtemplates.com/licensing" title="template license">http://zypopwebtemplates.com/licensing</a></p>
+
+<h3>Lorem lipsum</h3>
+
+<p>Morbi fermentum condimentum felis, commodo vestibulum sem mattis sed. Aliquam magna ante, mollis vitae tincidunt in, malesuada vitae turpis. Sed aliquam libero ut velit bibendum consectetur. Quisque sagittis, est in laoreet semper, enim dui consequat felis, faucibus ornare urna velit nec leo. Maecenas condimentum velit vitae est lobortis fermentum. In tristique sem vitae metus ornare luctus tempus nisl volutpat. Integer et est id nisi tempus pharetra sagittis et libero.</p>
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <ul>	
+               <li>
+                    <h4><span>Navigation</span></h4>
+                    <ul class="blocklist">
+                        <li><a href="index.html" th:href="@{/}">Accueil</a></li>
+                        <li><a href="workbench/shops.html" th:href="@{/workbench/shops}">Boutiques</a></li>
+                        <li><a href="admin/shopsadmin" th:href="@{@/admin/shopsadmin}">Administration</a></li>
+                        <li><a href="#">Aide</a></li>
+                    </ul>
+                </li>
+
+            </ul> 
+        </div>
+    	<div class="clear"></div>
+    </div>
+</div>
+
+<div th:replace="footer :: thefooter"></div>
+
+<!-- 
+ <div id="footer">
+      <div class="footer-content">
+
+        <div class="footer-box">
+            <h4>A propos du site</h4>
+
+            <p>
+                Morbi fermentum, nunc id pellentesque blandit, lectus velit pellentesque nisl.
+            </p>
+        </div>
+        
+        <div class="footer-box">
+            <h4>Categories</h4>
+
+            <ul>
+              <li><a href="#">Lorem ipsum dolor sit amet.</a></li>
+              <li><a href="#">Quisque consequat nunc a felis.</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-box">
+
+            <h4>Nos réseaux</h4>
+            <ul>
+            <li><a href="http://zypopwebtemplates.com">ZyPOP web templates</a></li>
+						<li><a href="http://www.justfreetemplates.com" title="free web templates">Free web templates</a></li>
+						
+            </ul>	
+        </div>
+        
+        <div class="footer-box end-footer-box">
+            <h4>Search our site</h4>
+
+            <form action="#" method="get">
+                <p>
+                    <input type="text" id="searchquery" size="18" name="searchterm" />
+
+                    <input type="submit" id="searchbutton" value="Search" class="formbutton" />
+                </p>
+            </form>
+        </div>     
+        <div class="clear"></div> 
+    </div>
+    <div id="footer-links">
+
+    A link to http://www.zypopwebtemplates.com must remain. To remove link see http://www.zypopwebtemplates.com/licensing
+            <p>&copy; YourSite 2016. <a href="http://zypopwebtemplates.com/">Free Web Layouts</a> by ZyPOP</p>
+    </div>  
+</div>
+ -->
+</body>
+</html>

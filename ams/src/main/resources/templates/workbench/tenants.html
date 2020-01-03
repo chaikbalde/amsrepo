@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>AMS - Shops </title>
+<link rel="stylesheet" href="../../static/css/styles.css" th:href="@{/css/styles.css}"  type="text/css" />
+			
+            
+<script type="text/javascript" src="../../static/js/jquery.js" th:src="@{/js/jquery.js}"></script>
+<script type="text/javascript" src="../../static/js/slider.js" th:src="@{/js/slider.js}"></script>
+<script type="text/javascript" src="../../static/js/superfish.js" th:src="@{/js/superfish.js}"></script>
+
+<script type="text/javascript" src="../../static/js/custom.js" th:src="@{/js/custom.js}"></script>
+
+</head>
+
+<body class="noheader">
+<div id="container">
+
+    <div th:replace="header :: theheader"></div>
+        
+    <div id="nav">
+    	<ul class="sf-menu dropdown">
+        	<li><a href="index.html" th:href="@{/}">Accueil</a></li>
+            <li class="selected"><a class="has_submenu" href="#"  >Marché</a>
+            	<ul>
+                	<li><a href="shops.html" th:href="@{/workbench/shops}">Boutiques</a></li>
+                    <li class="selected"><a href="tenants.html" th:href="@{/workbench/tenants}">Locataires</a></li>
+                </ul>
+            </li>
+            <li><a class="has_submenu" href="#">Administration</a>
+            	<ul>
+                	<li><a href="shopsadmin.html" th:href="@{/admin/shopsadmin}">Boutiques</a></li>
+                	<li><a href="tenantsadmin.html" th:href="@{/admin/tenantsadmin}">Locataires</a></li>
+                    <li><a href="#">Employés</a></li>
+                    <li><a href="#">Utilisateurs</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Aide</a></li>
+            <li  style="margin-left: 50px; margin-top: 10px;">
+            	<form action="#" th:action="@{/logout}" method="post">
+            		<input type="submit" value="Déconnexion"/>
+            	</form>
+            </li>
+        </ul>
+    </div>
+        
+    <div id="body">
+        <div id="breadcrumbs">
+            <a href="index.html" th:href="@{/}" >Accueil</a> &raquo;
+            <strong>Marché - Locataires</strong>
+        </div>
+            
+		<div id="content">
+            <div class="box">
+            
+				<h1>Locataires</h1>
+
+				<p>&nbsp;</p>
+				
+				<p th:if="${create_success}">
+					<span style="background-color: green; color: white;"  th:utext="#{shop.create.success(${shop.reference})}" >Successfully Created Shop <b th:text="${shop.reference}"></b>  </span>
+				</p> 
+				
+				<p th:if="${delete_success}" >
+					<span style="background-color: green; color: white;" th:utext="#{shop.delete.success(${shopref}) }">Successfully Removed Shop ${shopref}</span>
+				</p>
+				
+				<p th:if="${update_success}" >
+					<span style="background-color: green; color: white;"  th:utext="#{shop.update.success(${shop.reference})}" >Successfully Updated Shop <b th:text="${shop.reference}"></b>  </span>
+				</p>
+				
+
+				<h4>Liste des locataires </h4>
+				<table>
+					<tbody>
+						<tr>
+							<th>Nom, Prénom(s)</th>
+							<th>Adresse</th>
+							<th>Téléphone</th>
+							<th>Location(s)</th>
+							<th>Soldé</th>
+						</tr>
+						<tr th:each="tenant: ${tenants}">
+							<td><a href="#" th:href="@{'/workbench/tenants/' + ${tenant.id}}" ><span th:text="${tenant.lastName} + ', ' + ${tenant.firstName}">BALDEDIALLO</span> </a></td>
+							<td th:text="${tenant.address}">BP 9999 Conakry</td>
+							<td th:text="${tenant.phone}">99 99 99 99</td>
+							<td th:each="shptnt : ${tenant.shops}">
+								<span th:text="'- ' + ${shptnt.shop.reference}"></span><br/>
+							</td>
+							<td th:each="shptnt : ${tenant.shops}" th:with="restToPay = ${shptnt.expectedAmount - shptnt.currentPaidAmount}">
+								<img alt="occupied" src="../../static/images/redcross.png" th:src="${restToPay > 0} ?   @{/images/redcross.png} : @{/images/checked.png}" th:title="${restToPay > 0} ? 'Reste: ' + ${#numbers.formatInteger(restToPay,4,'WHITESPACE')}">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p>&nbsp;</p>
+				                
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <ul>	
+               <li>
+                    <h4><span>Navigation</span></h4>
+                    <ul class="blocklist">
+                        <li><a href="index.html" th:href="@{/}">Accueil</a></li>
+                        <li><a href="shops.html" th:href="@{/workbench/shops}">Boutiques</a></li>
+                        <li><a href="tenants.html" th:href="@{/workbench/tenants}">Locataires</a></li>
+                        <li><a href="#">Aide</a></li>
+                    </ul>
+                </li>               
+            </ul> 
+        </div>
+    	<div class="clear"></div>
+    </div>
+</div>
+
+<div th:replace="footer :: thefooter"></div>
+
+ </body>
+</html>
