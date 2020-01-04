@@ -1,5 +1,6 @@
 package com.hub4u.ams.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.hub4u.ams.model.Shop;
@@ -15,6 +16,8 @@ public interface ShopService {
 	Shop getShop(Long id);
 	
 	Optional<Shop> getShopByReference(String reference);
+	
+	List<Shop> getOccupiedShops();
 	
 	void removeAllShops();
 	

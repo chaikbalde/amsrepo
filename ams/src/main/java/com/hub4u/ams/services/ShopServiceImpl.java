@@ -1,5 +1,6 @@
 package com.hub4u.ams.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -54,6 +55,11 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public void removeShop(Shop shop) {
 		shopRepository.delete(shop);
+	}
+	
+	@Override
+	public List<Shop> getOccupiedShops() {
+		return this.shopRepository.findByOccupied();
 	}
 
 }
