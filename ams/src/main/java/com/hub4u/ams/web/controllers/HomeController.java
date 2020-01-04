@@ -11,7 +11,7 @@ public class HomeController {
 	private static Logger logger = LogManager.getLogger(HomeController.class);
 	
 	@GetMapping("/")
-	public String home() {
+	public String index() {
 		logger.debug("home() - Intro ...");
 		return "index";
 	}
